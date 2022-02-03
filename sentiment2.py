@@ -5,7 +5,6 @@ import pandas as pd
 df=pd.read_csv(r"C:/Users/geeth/Desktop/sentiments data.csv")
 textarray = df['SentimentText']
 
-
 from nltk.corpus import stopwords   
 import numpy as np
 import re
@@ -30,7 +29,6 @@ def clean_tweet(tweet):
 results = [clean_tweet(tw) for tw in textarray]
 df['cleaned_words']=results
 
-
 #training 
 from sklearn.model_selection import train_test_split
 train,test = train_test_split(df,test_size=0.3)
@@ -45,10 +43,7 @@ test_x=cv.transform(test['cleaned_words'].values)
 train_y=train['Sentiment']
 test_y=test['Sentiment']
 
-
-
 #model fitting
-
 from sklearn.linear_model import LogisticRegression
 lr = LogisticRegression(solver = 'liblinear', random_state = 50, max_iter=1000)
 lr.fit(train_x,train_y)
@@ -59,7 +54,6 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
 print("Accuracy: ",round(accuracy_score(test_y,pred_y),3))
 print("F1: ",round(f1_score(test_y, pred_y),3))
-
 
 #Process user input data
 while True:
